@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Google Books API</title>
+  </head>
+  <body>
+    <h1>Google Books API</h1>
+    <ul id="books"></ul>
+    <script>
+             var key = "AIzaSyDaUO0FJi8YGsEcb9c9jgUCp1WS1MFOjCs";
+
+             var url = "https://www.googleapis.com/books/v1/volumes?q=quilting";
+             var search = "Javascript";
+
+             var httpRequest = new XMLHttpRequest();
+
+             httpRequest.onreadystatechange = function () {
+               console.log(httpRequest.readyState);
+               console.log(httpRequest.responseText);
+               if (httpRequest.readyState == XMLHttpRequest.DONE) {
+                 var data = JSON.parse(httpRequest.responseText);
+                 console.log(data);
+
+                 var books = documents.getElementByID("books");
+
+                 for (var i = 0; i < data.items.length; i++) {
+                   var title = data.items[i].volumeInfo.title;
+                   console.log(link);
+
+
+                   // Fetch the book cover image - smallThumbnail or thumbnail
+                   var image = data.items[i].volumeInfo.imageLinks.smallThumbnail;
+                   console.log(image);
+
+                   var newBook = "<li><a href='" + link + "'›" + title + "</a><br>" +
+       "<img src='" + image + "'›" +
+
+      "</li>"；
+       books.innerHTML += newBook;
+                 }
+               }
+             };
+
+             httpRequest.open("GET", url + search);
+             httpRequest.send();
+    </script>
+  </body>
+</html>
